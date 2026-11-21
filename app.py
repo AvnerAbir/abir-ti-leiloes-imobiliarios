@@ -128,9 +128,20 @@ def calcular_hash_senha(senha, salt):
         600000
     ).hex()
 
-
 def carregar_usuarios():
 
+    # Primeiro, tenta carregar os usuários dos Secrets na nuvem.
+    try:
+        usuarios_json = st.secrets.get("usuarios_json")
+
+        if usuarios_json:
+            dados = json.loads(usuarios_json)
+            return dados.get("usuarios", [])
+
+    except Exception:
+        pass
+
+    # Se não houver Secrets, utiliza o arquivo local.
     if not ARQUIVO_USUARIOS.exists():
         return None
 
