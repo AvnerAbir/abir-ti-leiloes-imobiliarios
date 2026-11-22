@@ -15,7 +15,7 @@ import streamlit as st
 # ==========================================================
 
 PASTA = Path(__file__).parent
-ARQUIVO_BASE = PASTA / "coleta" / "base_consolidada_leiloes.csv"
+ARQUIVO_BASE = PASTA / "coleta" / "base_consolidada_com_caixa.csv"
 ARQUIVO_USUARIOS = PASTA / "usuarios.json"
 
 # Manter True durante o desenvolvimento.
