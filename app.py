@@ -307,9 +307,10 @@ def normalizar_texto(texto):
 def classificar_registro(valor):
 
     valor = normalizar_texto(valor)
+    valor = valor.replace("?", "a")
 
     if valor in ["valido", "valida"]:
-        return "Válido"
+        return "V\u00e1lido"
 
     if valor == "parcial":
         return "Parcial"
@@ -317,7 +318,7 @@ def classificar_registro(valor):
     if valor == "erro":
         return "Erro"
 
-    return valor.title() if valor else "Não informado"
+    return valor.title() if valor else "N\u00e3o informado"
 
 
 def numero_formatado(valor):
