@@ -1,0 +1,323 @@
+{
+  "versao": 1,
+  "descricao": "Cadastro central de fontes do ABIR TI",
+  "politica_global": {
+    "requisicoes_simultaneas": 1,
+    "pausar_http": [
+      403,
+      429
+    ],
+    "pausar_em_captcha": true,
+    "respeitar_robots_txt": true,
+    "contornar_bloqueios": false,
+    "exigir_validacao_antes_da_coleta": true
+  },
+  "fontes": [
+    {
+      "id": "banco_brasil",
+      "nome": "Banco do Brasil",
+      "categoria": "banco",
+      "url": "https://www.seuimovelbb.com.br/",
+      "situacao": "validar_termos",
+      "intervalo_segundos": 5,
+      "coleta_automatica": false
+    },
+    {
+      "id": "caixa",
+      "nome": "Caixa Economica Federal",
+      "categoria": "banco",
+      "url": "https://venda-imoveis.caixa.gov.br/",
+      "situacao": "pausada_captcha",
+      "intervalo_segundos": 5,
+      "coleta_automatica": false
+    },
+    {
+      "id": "bradesco",
+      "nome": "Bradesco",
+      "categoria": "banco",
+      "url": "https://vitrinebradesco.com.br/auctions?type=realstate",
+      "situacao": "validar_termos",
+      "intervalo_segundos": 5,
+      "coleta_automatica": false
+    },
+    {
+      "id": "itau",
+      "nome": "Ita?",
+      "categoria": "banco",
+      "url": "https://www.itau.com.br/imoveis-itau?leilao=true",
+      "situacao": "pausada_bloqueio",
+      "intervalo_segundos": 5,
+      "coleta_automatica": false
+    },
+    {
+      "id": "santander",
+      "nome": "Santander",
+      "categoria": "banco",
+      "url": "https://www.santanderimoveis.com.br/",
+      "situacao": "pausada_bloqueio",
+      "intervalo_segundos": 5,
+      "coleta_automatica": false
+    },
+    {
+      "id": "brb",
+      "nome": "BRB",
+      "categoria": "banco",
+      "url": "https://feiraobrb.com.br/",
+      "situacao": "validar_acesso",
+      "intervalo_segundos": 5,
+      "coleta_automatica": false
+    },
+    {
+      "id": "safra",
+      "nome": "Banco Safra",
+      "categoria": "banco",
+      "url": null,
+      "situacao": "mapear_fontes",
+      "intervalo_segundos": 5,
+      "coleta_automatica": false
+    },
+    {
+      "id": "bmg",
+      "nome": "Banco BMG",
+      "categoria": "banco",
+      "url": null,
+      "situacao": "mapear_fontes",
+      "intervalo_segundos": 5,
+      "coleta_automatica": false
+    },
+    {
+      "id": "sicredi",
+      "nome": "Sicredi",
+      "categoria": "cooperativa_sistema",
+      "url": null,
+      "situacao": "mapear_cooperativas",
+      "intervalo_segundos": 5,
+      "coleta_automatica": false
+    },
+    {
+      "id": "sicoob",
+      "nome": "Sicoob",
+      "categoria": "cooperativa_sistema",
+      "url": "https://leilaosicoob.com.br/busca",
+      "situacao": "restricao_termos",
+      "intervalo_segundos": 5,
+      "coleta_automatica": false
+    },
+    {
+      "id": "cresol",
+      "nome": "Cresol",
+      "categoria": "cooperativa_sistema",
+      "url": null,
+      "situacao": "mapear_cooperativas",
+      "intervalo_segundos": 5,
+      "coleta_automatica": false
+    },
+    {
+      "id": "unicred",
+      "nome": "Unicred",
+      "categoria": "cooperativa_sistema",
+      "url": null,
+      "situacao": "mapear_fontes",
+      "intervalo_segundos": 5,
+      "coleta_automatica": false
+    },
+    {
+      "id": "ailos",
+      "nome": "Ailos",
+      "categoria": "cooperativa_sistema",
+      "url": null,
+      "situacao": "mapear_fontes",
+      "intervalo_segundos": 5,
+      "coleta_automatica": false
+    },
+    {
+      "id": "credisis",
+      "nome": "Credisis",
+      "categoria": "cooperativa_sistema",
+      "url": null,
+      "situacao": "mapear_fontes",
+      "intervalo_segundos": 5,
+      "coleta_automatica": false
+    },
+    {
+      "id": "pan",
+      "nome": "Banco PAN",
+      "categoria": "banco",
+      "url": "https://www.d1lance.com.br/banco-pan",
+      "situacao": "aguardando_autorizacao",
+      "intervalo_segundos": 5,
+      "coleta_automatica": false
+    },
+    {
+      "id": "btg",
+      "nome": "BTG Pactual / Enforce",
+      "categoria": "banco",
+      "url": "https://imoveiscomdesconto.com.br/",
+      "situacao": "restricao_termos",
+      "intervalo_segundos": 5,
+      "coleta_automatica": false
+    },
+    {
+      "id": "basa",
+      "nome": "Banco da Amazonia",
+      "categoria": "banco",
+      "url": "https://www.bancoamazonia.com.br/",
+      "situacao": "mapear_fontes",
+      "intervalo_segundos": 5,
+      "coleta_automatica": false
+    },
+    {
+      "id": "bnb",
+      "nome": "Banco do Nordeste",
+      "categoria": "banco",
+      "url": "https://d001inv05.bnb.gov.br/acesso-a-informacao/licitacoes-e-contratos/bens-a-venda",
+      "situacao": "validar_termos",
+      "intervalo_segundos": 5,
+      "coleta_automatica": false
+    },
+    {
+      "id": "bv",
+      "nome": "Banco BV / Votorantim",
+      "categoria": "banco",
+      "url": null,
+      "situacao": "mapear_fontes",
+      "intervalo_segundos": 5,
+      "coleta_automatica": false
+    },
+    {
+      "id": "pontte",
+      "nome": "Pontte",
+      "categoria": "fintech",
+      "url": null,
+      "situacao": "verificar_existencia_catalogo",
+      "intervalo_segundos": 5,
+      "coleta_automatica": false
+    },
+    {
+      "id": "leiloaria_smart",
+      "nome": "Leiloaria Smart",
+      "categoria": "leiloeiro",
+      "url": "https://leiloariasmart.com.br/",
+      "situacao": "aguardando_autorizacao",
+      "intervalo_segundos": 3,
+      "coleta_automatica": false
+    },
+    {
+      "id": "frazao",
+      "nome": "Fraz?o Leil?es",
+      "categoria": "leiloeiro",
+      "url": "https://www.frazaoleiloes.com.br/",
+      "situacao": "pausada_bloqueio",
+      "intervalo_segundos": 5,
+      "coleta_automatica": false
+    },
+    {
+      "id": "start_leilao",
+      "nome": "Start Leil?o",
+      "categoria": "plataforma",
+      "url": "https://startleilao.com/",
+      "situacao": "restricao_termos",
+      "intervalo_segundos": 5,
+      "coleta_automatica": false
+    },
+    {
+      "id": "zuk",
+      "nome": "Zuk",
+      "categoria": "plataforma",
+      "url": "https://www.portalzuk.com.br/",
+      "situacao": "ja_integrada_nao_reinvestigar",
+      "intervalo_segundos": 5,
+      "coleta_automatica": false
+    },
+    {
+      "id": "imoveis_leilao",
+      "nome": "Im?veis Leil?o",
+      "categoria": "plataforma",
+      "url": null,
+      "situacao": "mapear_fontes",
+      "intervalo_segundos": 5,
+      "coleta_automatica": false
+    },
+    {
+      "id": "leilao_aqui",
+      "nome": "Leil?o Aqui",
+      "categoria": "plataforma",
+      "url": null,
+      "situacao": "mapear_fontes",
+      "intervalo_segundos": 5,
+      "coleta_automatica": false
+    },
+    {
+      "id": "eu_leilao",
+      "nome": "EU Leil?o",
+      "categoria": "plataforma",
+      "url": null,
+      "situacao": "mapear_fontes",
+      "intervalo_segundos": 5,
+      "coleta_automatica": false
+    },
+    {
+      "id": "pestana",
+      "nome": "Pestana Leil?es",
+      "categoria": "leiloeiro",
+      "url": null,
+      "situacao": "mapear_fontes",
+      "intervalo_segundos": 5,
+      "coleta_automatica": false
+    },
+    {
+      "id": "capta",
+      "nome": "Capta",
+      "categoria": "plataforma",
+      "url": null,
+      "situacao": "mapear_fontes",
+      "intervalo_segundos": 5,
+      "coleta_automatica": false
+    },
+    {
+      "id": "hasta",
+      "nome": "Hasta",
+      "categoria": "leiloeiro",
+      "url": null,
+      "situacao": "mapear_fontes",
+      "intervalo_segundos": 5,
+      "coleta_automatica": false
+    },
+    {
+      "id": "buscai",
+      "nome": "BUSCAi",
+      "categoria": "plataforma",
+      "url": null,
+      "situacao": "mapear_fontes",
+      "intervalo_segundos": 5,
+      "coleta_automatica": false
+    },
+    {
+      "id": "bidhero",
+      "nome": "BidHero",
+      "categoria": "plataforma",
+      "url": null,
+      "situacao": "mapear_fontes",
+      "intervalo_segundos": 5,
+      "coleta_automatica": false
+    },
+    {
+      "id": "grupo_vip",
+      "nome": "Grupo Vip Leil?es",
+      "categoria": "leiloeiro",
+      "url": null,
+      "situacao": "mapear_fontes",
+      "intervalo_segundos": 5,
+      "coleta_automatica": false
+    },
+    {
+      "id": "d1lance",
+      "nome": "D1LANCE",
+      "categoria": "plataforma",
+      "url": "https://www.d1lance.com.br/",
+      "situacao": "validar_termos",
+      "intervalo_segundos": 5,
+      "coleta_automatica": false
+    }
+  ]
+}
