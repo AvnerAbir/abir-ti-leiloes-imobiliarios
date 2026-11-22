@@ -321,6 +321,26 @@ def classificar_registro(valor):
     return valor.title() if valor else "N\u00e3o informado"
 
 
+
+def classificar_modalidade(valor):
+
+    valor = normalizar_texto(valor)
+
+    if valor in ["leilao sfi", "extrajudicial", "judicial"]:
+        return "Leil\u00e3o"
+
+    if valor == "venda direta online":
+        return "Venda direta"
+
+    if valor == "venda online":
+        return "Venda online"
+
+    if valor == "licitacao aberta":
+        return "Licita\u00e7\u00e3o"
+
+    return "N\u00e3o identificada"
+
+
 def numero_formatado(valor):
 
     return f"{valor:,}".replace(",", ".")
@@ -393,6 +413,10 @@ for coluna in colunas_necessarias:
 
 df["Classificacao_Exibicao"] = (
     df["Classificacao"].apply(classificar_registro)
+)
+
+df["Categoria_Modalidade"] = (
+    df["Modalidade"].apply(classificar_modalidade)
 )
 
 
@@ -572,14 +596,14 @@ with st.sidebar:
         tipos
     )
 
-    modalidades = ["Todas"] + opcoes_coluna(
+    categorias = ["Todas"] + opcoes_coluna(
         df,
-        "Modalidade"
+        "Categoria_Modalidade"
     )
 
-    modalidade = st.selectbox(
-        "Modalidade",
-        modalidades
+    categoria_modalidade = st.selectbox(
+        "Categoria da oportunidade",
+        categorias
     )
 
     situacoes = [
@@ -631,10 +655,10 @@ if tipo != "Todos":
         resultado["Tipo_Imovel"] == tipo
     ]
 
-if modalidade != "Todas":
+if categoria_modalidade != "Todas":
 
     resultado = resultado[
-        resultado["Modalidade"] == modalidade
+        resultado["Categoria_Modalidade"] == categoria_modalidade
     ]
 
 
