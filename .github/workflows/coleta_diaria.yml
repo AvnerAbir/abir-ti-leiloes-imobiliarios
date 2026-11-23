@@ -1,0 +1,69 @@
+﻿name: Coleta Diaria ABIR TI
+
+on:
+  schedule:
+    - cron: "0 11 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: coleta-abir-ti
+  cancel-in-progress: false
+
+jobs:
+  coletar:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+
+    steps:
+      - name: Baixar projeto
+        id: checkout
+        uses: actions/checkout@v4
+
+      - name: Configurar Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: Instalar dependencias
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Instalar Chromium
+        run: python -m playwright install --with-deps chromium
+
+      - name: Executar coleta Lance
+        id: coleta
+        continue-on-error: true
+        run: python coleta/coletar_lance.py
+
+      - name: Integrar registros progressivos
+        if: always() && steps.coleta.outcome != 'skipped' && hashFiles('coleta/lance_novo_progressivo.csv') != ''
+        run: python coleta/integrar_lance.py
+
+      - name: Salvar dados no GitHub
+        if: always() && steps.checkout.outcome == 'success'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          git add coleta/base_consolidada_com_caixa.csv
+
+          if [ -f coleta/lance_novo_progressivo.csv ]; then
+            git add coleta/lance_novo_progressivo.csv
+          fi
+
+          if ! git diff --cached --quiet; then
+            git commit -m "Atualiza base de imoveis - coleta automatica"
+            git push
+          else
+            echo "Nenhuma alteracao para publicar."
+          fi
+
+      - name: Sinalizar falha na coleta
+        if: always() && steps.coleta.outcome == 'failure'
+        run: exit 1
