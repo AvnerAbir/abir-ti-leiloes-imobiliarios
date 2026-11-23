@@ -477,9 +477,9 @@ def gerar_lista(pagina):
                     print("Página carregada com sucesso.")
                     break
 
-                print(
-                    f"Resposta inválida na tentativa {tentativa}."
-                )
+                print("STATUS HTTP:", resposta.status if resposta else "SEM RESPOSTA")
+                print("URL FINAL:", resposta.url if resposta else url)
+                print(f"Resposta invalida na tentativa {tentativa}.")
 
             except Exception as erro:
                 print(
