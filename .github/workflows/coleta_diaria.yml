@@ -1,8 +1,9 @@
-﻿name: Coleta Diaria ABIR TI
+﻿name: Integracao de Dados ABIR TI
 
 on:
-  schedule:
-    - cron: "0 11 * * *"
+  push:
+    paths:
+      - "coleta/lance_novo_progressivo.csv"
   workflow_dispatch:
 
 permissions:
@@ -13,57 +14,40 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  coletar:
+  integrar:
     runs-on: ubuntu-latest
-    timeout-minutes: 90
 
     steps:
       - name: Baixar projeto
-        id: checkout
         uses: actions/checkout@v4
 
       - name: Configurar Python
         uses: actions/setup-python@v5
         with:
           python-version: "3.12"
-          cache: pip
 
-      - name: Instalar dependencias
+      - name: Verificar arquivo de dados
+        id: verificar
         run: |
-          python -m pip install --upgrade pip
-          pip install -r requirements.txt
+          if [ -f coleta/lance_novo_progressivo.csv ]; then
+            echo "disponivel=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "disponivel=false" >> "$GITHUB_OUTPUT"
+          fi
 
-      - name: Instalar Chromium
-        run: python -m playwright install --with-deps chromium
-
-      - name: Executar coleta Lance
-        id: coleta
-        continue-on-error: true
-        run: python coleta/coletar_lance.py
-
-      - name: Integrar registros progressivos
-        if: always() && steps.coleta.outcome != 'skipped' && hashFiles('coleta/lance_novo_progressivo.csv') != ''
+      - name: Integrar registros
+        if: steps.verificar.outputs.disponivel == 'true'
         run: python coleta/integrar_lance.py
 
-      - name: Salvar dados no GitHub
-        if: always() && steps.checkout.outcome == 'success'
+      - name: Publicar base atualizada
+        if: steps.verificar.outputs.disponivel == 'true'
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-
           git add coleta/base_consolidada_com_caixa.csv
-
-          if [ -f coleta/lance_novo_progressivo.csv ]; then
-            git add coleta/lance_novo_progressivo.csv
-          fi
-
           if ! git diff --cached --quiet; then
-            git commit -m "Atualiza base de imoveis - coleta automatica"
+            git commit -m "Atualiza base de imoveis automaticamente"
             git push
           else
-            echo "Nenhuma alteracao para publicar."
+            echo "Nenhuma alteracao na base."
           fi
-
-      - name: Sinalizar falha na coleta
-        if: always() && steps.coleta.outcome == 'failure'
-        run: exit 1
