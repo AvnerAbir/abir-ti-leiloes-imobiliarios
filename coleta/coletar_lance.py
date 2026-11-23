@@ -711,6 +711,15 @@ def executar():
     print("Arquivo de dados:", ARQUIVO_SAIDA)
     print("Arquivo de erros:", ARQUIVO_ERROS)
 
+    print("\nEnviando dados ao GitHub...")
+    import subprocess
+    import sys
+
+    subprocess.run(
+        [sys.executable, str(PASTA / "enviar_lance_github.py")],
+        check=True
+    )
+
 
 if __name__ == "__main__":
     executar()
