@@ -354,6 +354,42 @@
       "situacao": "validar_termos_e_coleta",
       "intervalo_segundos": 10,
       "coleta_automatica": false
+    },
+    {
+      "id": "vendasgov_uniao",
+      "nome": "VendasGov — Imóveis da União",
+      "categoria": "orgao_federal",
+      "url": "https://imoveis.economia.gov.br/",
+      "situacao": "validar_termos_e_coleta",
+      "intervalo_segundos": 10,
+      "coleta_automatica": false
+    },
+    {
+      "id": "mega_leiloes",
+      "nome": "Mega Leilões",
+      "categoria": "leiloeiro",
+      "url": "https://www.megaleiloes.com.br/imoveis",
+      "situacao": "validar_termos_e_coleta",
+      "intervalo_segundos": 10,
+      "coleta_automatica": false
+    },
+    {
+      "id": "superbid_imoveis",
+      "nome": "Superbid Exchange — Imóveis",
+      "categoria": "plataforma",
+      "url": "https://exchange.superbid.net/h/imoveis",
+      "situacao": "validar_termos_e_coleta",
+      "intervalo_segundos": 10,
+      "coleta_automatica": false
+    },
+    {
+      "id": "hasta_bancos",
+      "nome": "Hasta — Leilões de bancos",
+      "categoria": "plataforma",
+      "url": "https://hasta.com.br/leiloes/bancos",
+      "situacao": "validar_termos_e_coleta",
+      "intervalo_segundos": 10,
+      "coleta_automatica": false
     }
   ]
 }
