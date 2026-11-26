@@ -318,6 +318,42 @@
       "situacao": "validar_termos",
       "intervalo_segundos": 5,
       "coleta_automatica": false
+    },
+    {
+      "id": "emgea",
+      "nome": "EMGEA — Imóveis",
+      "categoria": "empresa_publica",
+      "url": "https://www.emgeaimoveis.com.br/",
+      "situacao": "validar_termos_e_coleta",
+      "intervalo_segundos": 10,
+      "coleta_automatica": false
+    },
+    {
+      "id": "comprei_pgfn",
+      "nome": "Comprei — PGFN",
+      "categoria": "orgao_federal",
+      "url": "https://comprei.pgfn.gov.br/",
+      "situacao": "validar_termos_e_coleta",
+      "intervalo_segundos": 10,
+      "coleta_automatica": false
+    },
+    {
+      "id": "biasi",
+      "nome": "Biasi Leilões",
+      "categoria": "leiloeiro",
+      "url": "https://www.biasileiloes.com.br/",
+      "situacao": "validar_termos_e_coleta",
+      "intervalo_segundos": 10,
+      "coleta_automatica": false
+    },
+    {
+      "id": "freitas",
+      "nome": "Freitas Leiloeiro",
+      "categoria": "leiloeiro",
+      "url": "https://www.freitasleiloeiro.com.br/",
+      "situacao": "validar_termos_e_coleta",
+      "intervalo_segundos": 10,
+      "coleta_automatica": false
     }
   ]
 }
