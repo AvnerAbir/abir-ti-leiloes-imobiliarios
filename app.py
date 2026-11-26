@@ -1,4 +1,4 @@
-
+﻿
 import json
 import hashlib
 import hmac
@@ -23,8 +23,8 @@ ARQUIVO_USUARIOS = PASTA / "usuarios.json"
 MODO_TESTE_SEM_LOGIN = False
 
 st.set_page_config(
-    page_title="ABIR TI | Leilões Imobiliários",
-    page_icon="🏠",
+    page_title="ABIR TI | LeilÃµes ImobiliÃ¡rios",
+    page_icon="ðŸ ",
     layout="wide"
 )
 
@@ -108,6 +108,27 @@ st.markdown("""
     font-size: 14px;
 }
 
+
+.stButton > button,
+.stDownloadButton > button {
+    background-color: #006B70 !important;
+    color: #FFFFFF !important;
+    border: 1px solid #006B70 !important;
+    border-radius: 8px !important;
+    font-weight: 600 !important;
+}
+
+.stButton > button:hover,
+.stDownloadButton > button:hover {
+    background-color: #004F54 !important;
+    color: #FFFFFF !important;
+    border-color: #004F54 !important;
+}
+
+.stButton > button:focus,
+.stDownloadButton > button:focus {
+    box-shadow: 0 0 0 2px #80B8BA !important;
+}
 footer {
     visibility: hidden;
 }
@@ -130,7 +151,7 @@ def calcular_hash_senha(senha, salt):
 
 def carregar_usuarios():
 
-    # Primeiro, tenta carregar os usuários dos Secrets na nuvem.
+    # Primeiro, tenta carregar os usuÃ¡rios dos Secrets na nuvem.
     try:
         usuarios_json = st.secrets.get("usuarios_json")
 
@@ -141,7 +162,7 @@ def carregar_usuarios():
     except Exception:
         pass
 
-    # Se não houver Secrets, utiliza o arquivo local.
+    # Se nÃ£o houver Secrets, utiliza o arquivo local.
     if not ARQUIVO_USUARIOS.exists():
         return None
 
@@ -192,7 +213,7 @@ def verificar_acesso():
     if not usuarios:
 
         st.error(
-            "Acesso indisponível. A configuração dos usuários "
+            "Acesso indisponÃ­vel. A configuraÃ§Ã£o dos usuÃ¡rios "
             "precisa ser realizada."
         )
         st.stop()
@@ -204,17 +225,17 @@ def verificar_acesso():
     <div class="abir-header">
         <div class="abir-logo">ABIR TI</div>
         <div class="abir-subtitle">
-            INTELIGÊNCIA EM LEILÕES IMOBILIÁRIOS
+            INTELIGÃŠNCIA EM LEILÃ•ES IMOBILIÃRIOS
         </div>
     </div>
     """, unsafe_allow_html=True)
 
-    st.subheader("Acesso à plataforma")
-    st.caption("Área restrita para usuários autorizados.")
+    st.subheader("Acesso Ã  plataforma")
+    st.caption("Ãrea restrita para usuÃ¡rios autorizados.")
 
     with st.form("form_login"):
 
-        usuario = st.text_input("Usuário")
+        usuario = st.text_input("UsuÃ¡rio")
         senha = st.text_input("Senha", type="password")
 
         entrar = st.form_submit_button(
@@ -234,7 +255,7 @@ def verificar_acesso():
             st.rerun()
 
         else:
-            st.error("Usuário ou senha inválidos.")
+            st.error("UsuÃ¡rio ou senha invÃ¡lidos.")
 
     st.stop()
 
@@ -283,12 +304,12 @@ def opcoes_coluna(df, coluna):
 def mostrar_valor(valor):
 
     if pd.isna(valor):
-        return "Não informado"
+        return "NÃ£o informado"
 
     valor = str(valor).strip()
 
     if not valor or valor.lower() == "nan":
-        return "Não informado"
+        return "NÃ£o informado"
 
     return valor
 
@@ -361,7 +382,7 @@ df = carregar_imoveis()
 
 if df.empty:
 
-    st.error("A base consolidada não foi encontrada ou está vazia.")
+    st.error("A base consolidada nÃ£o foi encontrada ou estÃ¡ vazia.")
 
     st.info(
         "Verifique o arquivo "
@@ -430,12 +451,12 @@ st.markdown(
     <div class="abir-header">
         <div class="abir-logo">ABIR TI</div>
         <div class="abir-subtitle">
-            INTELIGÊNCIA EM LEILÕES IMOBILIÁRIOS
+            INTELIGÃŠNCIA EM LEILÃ•ES IMOBILIÃRIOS
         </div>
         <div class="abir-description">
-            Encontre oportunidades imobiliárias.<br>
-            Consulte imóveis de leilões judiciais e extrajudiciais
-            em diferentes portais, em um só lugar.
+            Encontre oportunidades imobiliÃ¡rias.<br>
+            Consulte imÃ³veis de leilÃµes judiciais e extrajudiciais
+            em diferentes portais, em um sÃ³ lugar.
         </div>
     </div>
     """,
@@ -446,7 +467,7 @@ st.markdown(
 if st.session_state.get("perfil_atual"):
 
     st.caption(
-        f"Usuário conectado: {st.session_state['perfil_atual']}"
+        f"UsuÃ¡rio conectado: {st.session_state['perfil_atual']}"
     )
 
 
@@ -458,7 +479,7 @@ with st.sidebar:
 
     st.markdown("## ABIR TI")
 
-    st.caption("Consulta de imóveis em leilão")
+    st.caption("Consulta de imÃ³veis em leilÃ£o")
 
     st.divider()
 
@@ -479,7 +500,7 @@ with st.sidebar:
 total = len(df)
 
 validos = (
-    df["Classificacao_Exibicao"] == "Válido"
+    df["Classificacao_Exibicao"] == "VÃ¡lido"
 ).sum()
 
 parciais = (
@@ -492,15 +513,15 @@ erros = (
 
 
 st.markdown(
-    '<h3 class="section-title">Visão geral da base</h3>',
+    '<h3 class="section-title">VisÃ£o geral da base</h3>',
     unsafe_allow_html=True
 )
 
 col1, col2, col3, col4 = st.columns(4)
 
 indicadores = [
-    (col1, "Total de imóveis", total),
-    (col2, "Cadastros válidos", validos),
+    (col1, "Total de imÃ³veis", total),
+    (col2, "Cadastros vÃ¡lidos", validos),
     (col3, "Cadastros parciais", parciais),
     (col4, "Registros com erro", erros)
 ]
@@ -526,7 +547,7 @@ for coluna, titulo, valor in indicadores:
 st.divider()
 
 st.markdown(
-    '<h3 class="section-title">Localize seu imóvel</h3>',
+    '<h3 class="section-title">Localize seu imÃ³vel</h3>',
     unsafe_allow_html=True
 )
 
@@ -554,7 +575,7 @@ with st.sidebar:
     )
 
     municipio = st.selectbox(
-        "Município",
+        "MunicÃ­pio",
         municipios
     )
 
@@ -592,7 +613,7 @@ with st.sidebar:
     )
 
     tipo = st.selectbox(
-        "Tipo de imóvel",
+        "Tipo de imÃ³vel",
         tipos
     )
 
@@ -607,14 +628,14 @@ with st.sidebar:
     )
 
     situacoes = [
-        "Válidos e parciais",
-        "Somente válidos",
+        "VÃ¡lidos e parciais",
+        "Somente vÃ¡lidos",
         "Somente parciais",
         "Todos, incluindo erros"
     ]
 
     situacao = st.selectbox(
-        "Classificação do cadastro",
+        "ClassificaÃ§Ã£o do cadastro",
         situacoes
     )
 
@@ -662,18 +683,18 @@ if categoria_modalidade != "Todas":
     ]
 
 
-if situacao == "Válidos e parciais":
+if situacao == "VÃ¡lidos e parciais":
 
     resultado = resultado[
         resultado["Classificacao_Exibicao"].isin(
-            ["Válido", "Parcial"]
+            ["VÃ¡lido", "Parcial"]
         )
     ]
 
-elif situacao == "Somente válidos":
+elif situacao == "Somente vÃ¡lidos":
 
     resultado = resultado[
-        resultado["Classificacao_Exibicao"] == "Válido"
+        resultado["Classificacao_Exibicao"] == "VÃ¡lido"
     ]
 
 elif situacao == "Somente parciais":
@@ -688,8 +709,8 @@ elif situacao == "Somente parciais":
 # ==========================================================
 
 pesquisa = st.text_input(
-    "Pesquisar por endereço, código, processo ou palavra-chave",
-    placeholder="Ex.: apartamento, Brasília, 235138..."
+    "Pesquisar por endereÃ§o, cÃ³digo, processo ou palavra-chave",
+    placeholder="Ex.: apartamento, BrasÃ­lia, 235138..."
 )
 
 if pesquisa.strip():
@@ -738,20 +759,20 @@ if pesquisa.strip():
 st.divider()
 
 st.markdown(
-    '<h3 class="section-title">Imóveis encontrados</h3>',
+    '<h3 class="section-title">ImÃ³veis encontrados</h3>',
     unsafe_allow_html=True
 )
 
 total_resultados = len(resultado)
 
 st.write(
-    f"**{numero_formatado(total_resultados)} imóveis encontrados**"
+    f"**{numero_formatado(total_resultados)} imÃ³veis encontrados**"
 )
 
 
 if resultado.empty:
 
-    st.info("Nenhum imóvel corresponde aos filtros selecionados.")
+    st.info("Nenhum imÃ³vel corresponde aos filtros selecionados.")
 
 else:
 
@@ -770,11 +791,12 @@ else:
     ).encode("utf-8-sig")
 
     st.download_button(
-        "📥 Baixar resultados da pesquisa",
+        "ðŸ“¥ Baixar resultados da pesquisa",
         data=csv_resultado,
         file_name="resultado_leiloes.csv",
         mime="text/csv"
     )
+
 
     # ------------------------------------------------------
     # PAGINACAO
@@ -789,7 +811,7 @@ else:
     if total_paginas > 1:
 
         pagina = st.selectbox(
-            "Página de resultados",
+            "PÃ¡gina de resultados",
             list(range(1, total_paginas + 1))
         )
 
@@ -802,16 +824,58 @@ else:
     resultados_pagina = resultado.iloc[inicio:fim]
 
     st.caption(
-        f"Exibindo {inicio + 1} até "
+        f"Exibindo {inicio + 1} atÃ© "
         f"{min(fim, total_resultados)} "
-        f"de {numero_formatado(total_resultados)} imóveis."
+        f"de {numero_formatado(total_resultados)} imÃ³veis."
     )
 
     # ------------------------------------------------------
     # CARTOES DOS IMOVEIS
     # ------------------------------------------------------
 
-    for _, registro in resultados_pagina.iterrows():
+    def _chave_selecao_abir(registro, indice):
+        codigo = str(registro.get("Codigo_Imovel", "")).strip()
+        codigo = codigo.replace(" ", "_")
+        return f"abir_selecionar_{codigo or 'sem_codigo'}_{indice}"
+
+    chaves_selecao_pagina = []
+
+    for indice_resultado, registro in resultados_pagina.iterrows():
+        chave = _chave_selecao_abir(registro, indice_resultado)
+        chaves_selecao_pagina.append(chave)
+
+        if chave not in st.session_state:
+            st.session_state[chave] = False
+
+    def _marcar_pagina_abir():
+        for chave in chaves_selecao_pagina:
+            st.session_state[chave] = True
+
+    def _limpar_pagina_abir():
+        for chave in chaves_selecao_pagina:
+            st.session_state[chave] = False
+
+    col_marcar, col_limpar = st.columns(2)
+
+    with col_marcar:
+        st.button(
+            "Selecionar todos desta p?gina",
+            key=f"abir_marcar_pagina_{pagina}",
+            on_click=_marcar_pagina_abir,
+            use_container_width=True
+        )
+
+    with col_limpar:
+        st.button(
+            "Limpar sele??o desta p?gina",
+            key=f"abir_limpar_pagina_{pagina}",
+            on_click=_limpar_pagina_abir,
+            use_container_width=True
+        )
+
+    for indice_resultado, registro in resultados_pagina.iterrows():
+
+        chave_selecao = _chave_selecao_abir(registro, indice_resultado)
 
         with st.container(border=True):
 
@@ -819,9 +883,19 @@ else:
 
             with col_esquerda:
 
+                st.checkbox(
+                    "Selecionar este im?vel para o relat?rio",
+                    key=chave_selecao
+                )
+
+
+            col_esquerda, col_direita = st.columns([3, 1])
+
+            with col_esquerda:
+
                 st.markdown(
                     f"**{mostrar_valor(registro['Tipo_Imovel'])}**"
-                    f" — {mostrar_valor(registro['Municipio'])}/"
+                    f" â€” {mostrar_valor(registro['Municipio'])}/"
                     f"{mostrar_valor(registro['Estado'])}"
                 )
 
@@ -835,11 +909,11 @@ else:
                 )
 
                 st.write(
-                    f"**Endereço:** {mostrar_valor(registro['Endereco'])}"
+                    f"**EndereÃ§o:** {mostrar_valor(registro['Endereco'])}"
                 )
 
                 st.write(
-                    f"**Código:** {mostrar_valor(registro['Codigo_Imovel'])}"
+                    f"**CÃ³digo:** {mostrar_valor(registro['Codigo_Imovel'])}"
                 )
 
             with col_direita:
@@ -852,7 +926,7 @@ else:
 
                 st.write(classificacao)
 
-                st.write("**Avaliação**")
+                st.write("**AvaliaÃ§Ã£o**")
 
                 st.write(
                     mostrar_valor(registro["Valor_Avaliacao"])
@@ -863,11 +937,92 @@ else:
                 if link.startswith(("http://", "https://")):
 
                     st.link_button(
-                        "Abrir anúncio",
+                        "Abrir anÃºncio",
                         link,
                         use_container_width=True
                     )
 
+
+    # ------------------------------------------------------
+    # RELATORIOS INTELIGENTES ABIR TI
+    # ------------------------------------------------------
+
+    indices_selecionados = [
+        indice
+        for indice, linha in resultado.iterrows()
+        if st.session_state.get(
+            _chave_selecao_abir(linha, indice), False
+        )
+    ]
+
+    dados_selecionados = resultado.loc[indices_selecionados].copy()
+    quantidade_selecionada = len(dados_selecionados)
+
+    st.divider()
+
+    with st.expander(
+        "\U0001F4CA Relat\u00f3rios Inteligentes ? financeiro e geogr\u00e1fico",
+        expanded=False
+    ):
+
+        st.write(
+            f"Im\u00f3veis selecionados: **{quantidade_selecionada}**"
+        )
+
+        if quantidade_selecionada == 0:
+            st.info(
+                "Selecione os im\u00f3veis desejados nos cart\u00f5es acima."
+            )
+
+        elif quantidade_selecionada > 100:
+            st.warning(
+                "O limite \u00e9 de 100 im\u00f3veis por relat\u00f3rio. "
+                "Reduza a sele\u00e7\u00e3o para continuar."
+            )
+
+        incluir_geografia = st.checkbox(
+            "Incluir pesquisa geogr\u00e1fica no OpenStreetMap",
+            value=False,
+            key="geografia_relatorio_abir"
+        )
+
+        if incluir_geografia:
+            st.info(
+                "A pesquisa geogr\u00e1fica ser\u00e1 limitada aos primeiros "
+                "20 im\u00f3veis selecionados. Os dados cartogr\u00e1ficos "
+                "n\u00e3o comprovam criminalidade, enchentes ou riscos geol\u00f3gicos."
+            )
+
+        if st.button(
+            "Gerar relat\u00f3rio Word",
+            key="gerar_relatorio_abir",
+            disabled=quantidade_selecionada == 0 or quantidade_selecionada > 100
+        ):
+
+            try:
+                from relatorios.gerador_relatorio_abir import gerar_relatorio
+
+                with st.spinner("Gerando relat\u00f3rio inteligente..."):
+                    arquivo_docx = gerar_relatorio(
+                        dados_selecionados,
+                        consultar_geografia=incluir_geografia,
+                        limite_geografia=20 if incluir_geografia else None
+                    )
+
+                st.success("Relat\u00f3rio gerado com sucesso!")
+
+                st.download_button(
+                    "\U0001F4E5 Baixar relat\u00f3rio Word",
+                    data=arquivo_docx,
+                    file_name="relatorio_inteligencia_abir.docx",
+                    mime="application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+                    key="download_relatorio_abir"
+                )
+
+            except Exception as exc:
+                st.error(
+                    f"N\u00e3o foi poss\u00edvel gerar o relat\u00f3rio: {exc}"
+                )
 
     # ------------------------------------------------------
     # FICHA COMPLETA
@@ -876,7 +1031,7 @@ else:
     st.divider()
 
     st.markdown(
-        '<h3 class="section-title">Ficha completa do imóvel</h3>',
+        '<h3 class="section-title">Ficha completa do imÃ³vel</h3>',
         unsafe_allow_html=True
     )
 
@@ -906,7 +1061,7 @@ else:
         )
 
     selecionado = st.selectbox(
-        "Selecione um imóvel para visualizar todos os detalhes",
+        "Selecione um imÃ³vel para visualizar todos os detalhes",
         opcoes_imoveis
     )
 
@@ -933,15 +1088,15 @@ else:
             )
 
             st.write(
-                f"**Código do imóvel:** {mostrar_valor(registro['Codigo_Imovel'])}"
+                f"**CÃ³digo do imÃ³vel:** {mostrar_valor(registro['Codigo_Imovel'])}"
             )
 
             st.write(
-                f"**Código do leilão:** {mostrar_valor(registro['Codigo_Leilao'])}"
+                f"**CÃ³digo do leilÃ£o:** {mostrar_valor(registro['Codigo_Leilao'])}"
             )
 
             st.write(
-                f"**Número do lote:** {mostrar_valor(registro['Numero_Lote'])}"
+                f"**NÃºmero do lote:** {mostrar_valor(registro['Numero_Lote'])}"
             )
 
             st.write(
@@ -949,7 +1104,7 @@ else:
             )
 
             st.write(
-                f"**Município:** {mostrar_valor(registro['Municipio'])}"
+                f"**MunicÃ­pio:** {mostrar_valor(registro['Municipio'])}"
             )
 
             st.write(
@@ -957,29 +1112,29 @@ else:
             )
 
             st.write(
-                f"**Endereço:** {mostrar_valor(registro['Endereco'])}"
+                f"**EndereÃ§o:** {mostrar_valor(registro['Endereco'])}"
             )
 
         with c2:
 
             st.write(
-                f"**Avaliação:** {mostrar_valor(registro['Valor_Avaliacao'])}"
+                f"**AvaliaÃ§Ã£o:** {mostrar_valor(registro['Valor_Avaliacao'])}"
             )
 
             st.write(
-                f"**Primeira praça:** {mostrar_valor(registro['Valor_Primeira_Praca'])}"
+                f"**Primeira praÃ§a:** {mostrar_valor(registro['Valor_Primeira_Praca'])}"
             )
 
             st.write(
-                f"**Data da primeira praça:** {mostrar_valor(registro['Data_Primeira_Praca'])}"
+                f"**Data da primeira praÃ§a:** {mostrar_valor(registro['Data_Primeira_Praca'])}"
             )
 
             st.write(
-                f"**Segunda praça:** {mostrar_valor(registro['Valor_Segunda_Praca'])}"
+                f"**Segunda praÃ§a:** {mostrar_valor(registro['Valor_Segunda_Praca'])}"
             )
 
             st.write(
-                f"**Data da segunda praça:** {mostrar_valor(registro['Data_Segunda_Praca'])}"
+                f"**Data da segunda praÃ§a:** {mostrar_valor(registro['Data_Segunda_Praca'])}"
             )
 
             st.write(
@@ -991,17 +1146,17 @@ else:
             )
 
             st.write(
-                f"**Área do terreno:** {mostrar_valor(registro['Area_Terreno'])}"
+                f"**Ãrea do terreno:** {mostrar_valor(registro['Area_Terreno'])}"
             )
 
             st.write(
-                f"**Área construída:** {mostrar_valor(registro['Area_Construida'])}"
+                f"**Ãrea construÃ­da:** {mostrar_valor(registro['Area_Construida'])}"
             )
 
-        with st.expander("Informações adicionais"):
+        with st.expander("InformaÃ§Ãµes adicionais"):
 
             st.write(
-                f"**Matrícula:** {mostrar_valor(registro['Matricula'])}"
+                f"**MatrÃ­cula:** {mostrar_valor(registro['Matricula'])}"
             )
 
             st.write(
@@ -1009,19 +1164,19 @@ else:
             )
 
             st.write(
-                f"**Ocupação:** {mostrar_valor(registro['Ocupacao'])}"
+                f"**OcupaÃ§Ã£o:** {mostrar_valor(registro['Ocupacao'])}"
             )
 
             st.write(
-                f"**Situação da extração:** {mostrar_valor(registro['Situacao_Extracao'])}"
+                f"**SituaÃ§Ã£o da extraÃ§Ã£o:** {mostrar_valor(registro['Situacao_Extracao'])}"
             )
 
             st.write(
-                f"**Classificação:** {mostrar_valor(registro['Classificacao'])}"
+                f"**ClassificaÃ§Ã£o:** {mostrar_valor(registro['Classificacao'])}"
             )
 
             st.write(
-                f"**Link da relação do leilão:** "
+                f"**Link da relaÃ§Ã£o do leilÃ£o:** "
                 f"{mostrar_valor(registro['Link_Relacao_Leilao'])}"
             )
 
@@ -1030,7 +1185,7 @@ else:
         if link.startswith(("http://", "https://")):
 
             st.link_button(
-                "🔗 Abrir anúncio original do imóvel",
+                "ðŸ”— Abrir anÃºncio original do imÃ³vel",
                 link,
                 use_container_width=True
             )
@@ -1050,7 +1205,8 @@ st.markdown("""
     font-size:13px;
 ">
     <strong>ABIR TI</strong><br>
-    Inteligência em Leilões Imobiliários<br><br>
-    Página desenvolvida por Petercley
+    InteligÃªncia em LeilÃµes ImobiliÃ¡rios<br><br>
+    PÃ¡gina desenvolvida por Petercley
 </div>
 """, unsafe_allow_html=True)
+

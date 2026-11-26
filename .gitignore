@@ -1,0 +1,10 @@
+
+usuarios.json
+*.bak
+*.pyc
+__pycache__/
+dados_geograficos/
+relatorios/teste_*.docx
+teste_*.docx
+relatorios/base_geografica.db
+banco/leiloes_imoveis.db

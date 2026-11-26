@@ -1,3 +1,5 @@
 ﻿streamlit
 pandas
 playwright==1.65.2
+requests
+python-docx
